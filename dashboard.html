@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fraud Detection Dashboard</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <div class="sidebar-header">
+        <h2>Fraud Detection</h2>
+      </div>
+      <ul class="nav-links">
+        <li class="active" data-panel="dashboard"><span class="icon">📊</span> Dashboard</li>
+        <li data-panel="alerts"><span class="icon">🚨</span> Fraud Alerts</li>
+        <li data-panel="transactions"><span class="icon">💸</span> Transactions</li>
+        <li data-panel="high-risk"><span class="icon">⚠️</span> High Risk Accounts</li>
+        <li data-panel="logins"><span class="icon">🔐</span> Login Attempts</li>
+        <li data-panel="customers"><span class="icon">👥</span> Customers</li>
+        <li data-panel="accounts"><span class="icon">🏦</span> Accounts</li>
+        <li data-panel="devices"><span class="icon">📱</span> Devices</li>
+        <li data-panel="banks"><span class="icon">🏛️</span> Banks</li>
+        <li data-panel="risk-levels"><span class="icon">📈</span> Risk Levels</li>
+        <li data-panel="reports"><span class="icon">📝</span> Reports</li>
+        <li class="logout"><span class="icon">🚪</span> Logout</li>
+      </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="content">
+      <!-- Top Bar -->
+      <header class="top-bar">
+        <div class="search-container">
+          <input type="text" placeholder="Search...">
+          <button class="search-btn">🔍</button>
+        </div>
+        <div class="user-info">
+          <span class="user-name">Admin User</span>
+          <div class="user-avatar">👤</div>
+        </div>
+      </header>
+
+      <div class="main-content">
+
+        <!-- Dashboard Overview Panel -->
+        <div class="panel active" id="dashboard-panel">
+          <h1>Fraud Detection Dashboard</h1>
+          <div class="stats-container">
+            <div class="stat-card"><h3>Open Alerts</h3><p id="open-alerts">--</p></div>
+            <div class="stat-card"><h3>High Risk Accounts</h3><p id="high-risk-count">--</p></div>
+            <div class="stat-card"><h3>Failed Logins (24h)</h3><p id="failed-logins">--</p></div>
+            <div class="stat-card"><h3>Suspended Transactions</h3><p id="suspended-tx">--</p></div>
+          </div>
+          <div class="charts-container">
+            <div class="chart-card">
+              <h3>Alert Types</h3>
+              <canvas id="alertTypesChart"></canvas>
+            </div>
+            <div class="chart-card">
+              <h3>Risk Distribution</h3>
+              <canvas id="riskDistributionChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fraud Alerts Panel -->
+        <div class="panel" id="alerts-panel">
+          <h1>Fraud Alerts</h1>
+          <table class="data-table" id="alerts-table">
+            <thead><tr><th>ID</th><th>Type</th><th>Customer</th><th>Amount</th><th>Date</th><th>Priority</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <!-- Transactions Panel -->
+        <div class="panel" id="transactions-panel">
+          <h1>Transactions</h1>
+          <table class="data-table" id="transactions-table">
+            <thead><tr><th>ID</th><th>Customer</th><th>Type</th><th>Amount</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <!-- High Risk Accounts Panel -->
+        <div class="panel" id="high-risk-panel">
+          <h1>High Risk Accounts</h1>
+          <table class="data-table" id="high-risk-table">
+            <thead><tr><th>Account ID</th><th>Customer</th><th>Account Type</th><th>Balance</th><th>Risk Score</th><th>Actions</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <!-- Login Attempts Panel -->
+        <div class="panel" id="logins-panel">
+          <h1>Suspicious Login Attempts</h1>
+          <table class="data-table" id="logins-table">
+            <thead><tr><th>ID</th><th>Customer</th><th>Date</th><th>Status</th><th>IP Address</th><th>Location</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <!-- Customers Panel -->
+        <div class="panel" id="customers-panel">
+          <h1>Customers</h1>
+          <table class="data-table" id="customers-table">
+            <thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Profession</th><th>Since</th><th>Actions</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <!-- Accounts Panel -->
+        <div class="panel" id="accounts-panel">
+          <h1>Accounts</h1>
+          <table class="data-table" id="accounts-table">
+            <thead><tr><th>Account ID</th><th>Customer</th><th>Type</th><th>Balance</th><th>Status</th><th>Risk Score</th><th>Actions</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <!-- Devices Panel -->
+        <div class="panel" id="devices-panel">
+          <h1>Devices</h1>
+          <table class="data-table" id="devices-table">
+            <thead><tr><th>Device ID</th><th>Customer</th><th>Type</th><th>OS</th><th>IP Address</th><th>First Used</th><th>Last Used</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <!-- Banks Panel -->
+        <div class="panel" id="banks-panel">
+          <h1>Banks</h1>
+          <table class="data-table" id="banks-table">
+            <thead><tr><th>Bank ID</th><th>Name</th><th>Code</th><th>Address</th><th>Transaction Count</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <!-- Risk Levels Panel -->
+        <div class="panel" id="risk-levels-panel">
+          <h1>Risk Levels</h1>
+          <table class="data-table" id="risk-levels-table">
+            <thead><tr><th>Account ID</th><th>Risk Score</th><th>Device</th><th>Assessment Date</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <!-- Reports Panel -->
+        <div class="panel" id="reports-panel">
+          <h1>Reports</h1>
+          <div class="reports-container">
+            <div class="report-card"><h3>Monthly Fraud Summary</h3><button class="btn-primary">Generate</button></div>
+            <div class="report-card"><h3>Risk Assessment Report</h3><button class="btn-primary">Generate</button></div>
+            <div class="report-card"><h3>Suspicious Activity Patterns</h3><button class="btn-primary">Generate</button></div>
+            <div class="report-card"><h3>Compliance Report</h3><button class="btn-primary">Generate</button></div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="/js/dashboard.js"></script>
+</body>
+</html>

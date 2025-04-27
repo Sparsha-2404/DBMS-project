@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | Fraud Prevention System</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>Fraud Prevention</h2>
+            </div>
+            <ul class="nav-links">
+                <li data-panel="dashboard"><span class="icon">📊</span> Dashboard</li>
+                <li data-panel="alerts"><span class="icon">🚨</span> Fraud Alerts</li>
+                <li data-panel="transactions"><span class="icon">💸</span> Transactions</li>
+                <li data-panel="high-risk"><span class="icon">⚠️</span> High Risk Accounts</li>
+                <li data-panel="logins"><span class="icon">🔐</span> Login Attempts</li>
+                <li data-panel="reports"><span class="icon">📈</span> Reports</li>
+                <li class="active" data-panel="profile"><span class="icon">👤</span> My Profile</li>
+                <li class="logout"><span class="icon">🚪</span> Logout</li>
+            </ul>
+        </nav>
+        
+        <main class="content">
+            <header class="top-bar">
+                <div class="search-container">
+                    <input type="text" placeholder="Search...">
+                    <button class="search-btn">🔍</button>
+                </div>
+                <div class="user-info">
+                    <span class="user-name" id="header-username">User</span>
+                    <div class="user-avatar">👤</div>
+                </div>
+            </header>
+            
+            <div class="main-content">
+                <div class="panel active" id="profile-panel">
+                    <h1>My Profile</h1>
+                    
+                    <div class="profile-container">
+                        <div class="profile-header">
+                            <div class="profile-avatar">👤</div>
+                            <div class="profile-title">
+                                <h2 id="profile-name">User Name</h2>
+                                <p id="profile-role">Role</p>
+                                <p id="profile-member-since">Member since: </p>
+                            </div>
+                        </div>
+                        
+                        <div id="profile-message" class="message-container"></div>
+                        
+                        <div class="profile-section">
+                            <h3>Personal Information</h3>
+                            <form id="profile-form" action="/api/update-profile" method="POST">
+                                <div class="form-group">
+                                    <label for="firstName">First Name</label>
+                                    <input type="text" id="firstName" name="firstName" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="lastName">Last Name</label>
+                                    <input type="text" id="lastName" name="lastName" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" name="email" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="username">Username</label>
+                                    <input type="text" id="username" name="username" readonly>
+                                    <p class="form-hint">Username cannot be changed</p>
+                                </div>
+                                
+                                <button type="submit" class="btn-primary">Save Changes</button>
+                            </form>
+                        </div>
+                        
+                        <div class="profile-section">
+                            <h3>Change Password</h3>
+                            <form id="password-form" action="/api/change-password" method="POST">
+                                <div class="form-group">
+                                    <label for="currentPassword">Current Password</label>
+                                    <input type="password" id="currentPassword" name="currentPassword" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="newPassword">New Password</label>
+                                    <input type="password" id="newPassword" name="newPassword" required>
+                                    <p class="form-hint">Password must be at least 8 characters</p>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="confirmPassword">Confirm New Password</label>
+                                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                                </div>
+                                
+                                <button type="submit" class="btn-primary">Change Password</button>
+                            </form>
+                        </div>
+                        
+                        <div class="profile-section">
+                            <h3>Session Information</h3>
+                            <div class="session-info">
+                                <div class="info-row">
+                                    <div class="info-label">Last Login:</div>
+                                    <div id="last-login" class="info-value">-</div>
+                                </div>
+                                <div class="info-row">
+                                    <div class="info-label">IP Address:</div>
+                                    <div id="ip-address" class="info-value">-</div>
+                                </div>
+                                <div class="info-row">
+                                    <div class="info-label">Browser:</div>
+                                    <div id="browser" class="info-value">-</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/js/profile.js"></script>
+</body>
+</html>
